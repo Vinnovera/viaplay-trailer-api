@@ -1,0 +1,34 @@
+{
+  "name": "viaplay-trailer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "apicache": "^0.0.12",
+    "q": "^1.4.1",
+    "restify": "^4.0.3",
+    "xml2js": "^0.4.12"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "should": "^7.1.0",
+    "should-promised": "^0.3.1"
+  },
+  "scripts": {
+    "test": "mocha test",
+    "start": "node service.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vinnovera/viaplay-trailer-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vinnovera/viaplay-trailer-api/issues"
+  },
+  "homepage": "https://github.com/Vinnovera/viaplay-trailer-api#readme"
+}
