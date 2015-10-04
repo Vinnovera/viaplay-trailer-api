@@ -1,12 +1,8 @@
 'use strict';
 
 var
-    cluster      = require('cluster'),
-    numCPUs      = require('os').cpus().length,
-
-    env = {
-        'PORT': process.env.PORT || 8080
-    };
+    cluster = require('cluster'),
+    numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
     cluster.on('online', function(worker) {
@@ -19,9 +15,11 @@ if (cluster.isMaster) {
         cluster.fork();
     });
 
-    // Fork workers
+    console.log('Clustered service starting');
+
+    // Fork as many servers as there are CPU cores
     for (var i = 0; i < numCPUs; i++) {
-        cluster.fork(env);
+        cluster.fork();
     }
 } else {
     // Start server

@@ -1,0 +1,9 @@
+{
+  "server": {
+    "port": 8080
+  },
+  "cache": {
+    "enabled": true,
+    "debug": false
+  }
+}
