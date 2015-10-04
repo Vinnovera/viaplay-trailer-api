@@ -27,7 +27,7 @@ describe('REST API system test', function () {
 
             client.get('/trailer?url=https://content.viaplay.se/web-se/film/lucy-2014', function (err, req, res, data) {
                 res.statusCode.should.be.equal(200);
-                data.should.be.equal(data, {trailer: 'https://v.traileraddict.com/98689'});
+                data.should.eql({ trailer: 'https://v.traileraddict.com/98689' });
                 done();
             });
         });
@@ -35,7 +35,7 @@ describe('REST API system test', function () {
         it('should respond with error when no URL is given', function (done) {
             client.get('/trailer', function (err, req, res, data) {
                 res.statusCode.should.be.equal(500);
-                data.should.be.equal(data, {message: 'No URL given'});
+                data.should.eql({ message: 'No URL given' });
                 done();
             });
         });
