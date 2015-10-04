@@ -3,11 +3,13 @@
 var
     Q       = require('Q'),
     restify = require('restify'),
-    url     = require('url');
+    url     = require('url'),
+
+    apiUrl  = 'http://content.viaplay.se';
 
 function ViaplayContentModel() {
     var client = restify.createJSONClient({
-            url: 'http://content.viaplay.se'
+            url: apiUrl
         });
 
     function queryApi(query) {
@@ -33,7 +35,7 @@ function ViaplayContentModel() {
                 query;
 
             if (typeof urlParts === 'object' && urlParts.pathname) {
-
+                //Get the name from the last part of the path
                 name  = urlParts.pathname.split('/').pop();
                 query = '/web-se/film/' + name;
 

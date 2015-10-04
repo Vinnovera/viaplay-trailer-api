@@ -3,13 +3,15 @@
 var
     Q       = require('Q'),
     restify = require('restify'),
-    xml2js  = require('xml2js').parseString;
+    xml2js  = require('xml2js').parseString,
+
+    apiUrl   = 'http://api.traileraddict.com/',
+    videoUrl = 'https://v.traileraddict.com/';
 
 function TrailerAddictModel() {
     var client = restify.createStringClient({
-            url: 'http://api.traileraddict.com'
-        });
-
+        url: apiUrl
+    });
 
     function queryApi(query) {
         return Q.Promise(function(resolve, reject) {
@@ -39,14 +41,15 @@ function TrailerAddictModel() {
         });
     }
 
-    this.getTrailerByImdbId = function(imdbID) {
+    this.getTrailerByImdbId = function(imdbId) {
         return Q.Promise(function(resolve, reject) {
 
             var query;
 
-            if (typeof imdbID === 'string') {
-                imdbID = imdbID.replace('tt', '');
-                query = '/?imdb=' + imdbID + '&count=1&width=680';
+            if (typeof imdbId === 'string') {
+                //Trailer addict API only wants the number part of the iMDB ID
+                imdbId = imdbId.replace(/[^\d]+/,'');
+                query  = '/?imdb=' + imdbId;
 
                 queryApi(query)
                     .then(parseXml)
@@ -61,7 +64,7 @@ function TrailerAddictModel() {
     this.getTrailerUrlByTrailer = function(trailer) {
         return Q.Promise(function(resolve, reject) {
 
-            var url = 'https://v.traileraddict.com/';
+            var url = videoUrl;
 
             try {
                 url += trailer.trailers.trailer[0]['trailer_id'];
